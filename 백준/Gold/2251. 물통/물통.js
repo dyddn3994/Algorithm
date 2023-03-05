@@ -10,6 +10,8 @@ function dfs(a, b, c) {
 		set.add(c);
 	}
 	
+  // 각 물통마다 물이 들어있으면 다른 물통에 물 붓기 시도
+  // p: 들어갈 물통에 남은 빈칸과 부을 물 양 중에 작은 값을 부음
   if (a) {
     if (b < B) {
       const p = Math.min(a, B-b);
@@ -42,19 +44,6 @@ function dfs(a, b, c) {
       if (!visited[a][b+p][c-p]) dfs(a, b+p, c-p);
     }
   }
-
-	// if (b < B) {
-	// 	for (let i = 0; i < 3; i++) {
-	// 		const p = Math.min(water, capacity[i], B-b);
-  //     if (!visited[b+p][c]) dfs(water-p, b+p, c);
-	// 	}
-	// }
-	// if (c < C) {
-	// 	for (let i = 0; i < 3; i++) {
-	// 		const p = Math.min(water, capacity[i], C-c);
-	// 		if (!visited[b][c+p]) dfs(water-p, b, c+p);
-	// 	}
-	// }
 }
 
 // 입력
