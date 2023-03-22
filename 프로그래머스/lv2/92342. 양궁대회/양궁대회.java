@@ -22,11 +22,12 @@ class Solution {
             if (arr[i] > 0) lionPoint += 10-i;
             else if (info[i] > 0) apeachPoint += 10-i;
         }
+        int diff = lionPoint - apeachPoint;
         
         // 남은 화살 0에 넣고 max 비교
         arr[10] = n - cnt;
-        if (apeachPoint < lionPoint && max <= lionPoint - apeachPoint) {
-            if (max == lionPoint - apeachPoint) {
+        if (max <= diff) {
+            if (max == diff) {
                 for (int i = 9; i >= 0; i--) {
                     if (arr[i] > answer[i]) {
                         answer = arr.clone();
@@ -36,10 +37,9 @@ class Solution {
                 }
             }
             else {
-                        answer = arr.clone();
-                
+                answer = arr.clone();
             }
-            max = lionPoint - apeachPoint;
+            max = diff;
         }
         arr[10] = 0;
     }
