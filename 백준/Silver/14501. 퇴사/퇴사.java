@@ -1,40 +1,29 @@
 import java.io.*;
 import java.util.*;
- 
-public class Main {
-	// static
-	static int N;
-	static int[][] arr;
-	static int max = 0;
-	
-	static void dfs(int sum, int idx) {
-		for (int i = idx; i < N; i++) {
-			int nextDay = arr[0][i] + i;
-			int nextSum = arr[1][i] + sum;
-			
-			// 일자를 초과할경우 선택하지 않음
-			if (nextDay > N) continue;
-			
-			dfs(nextSum, nextDay);
-		}
-		max = Math.max(max, sum);
-	}
-	
+
+class Main {
     public static void main(String[] args) throws Exception {
-    	// 선언 및 초기화
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
+
         // 입력
-        N = Integer.parseInt(br.readLine());
-        arr = new int[2][N];
-        for (int i = 0; i < N; i++) {
-        	StringTokenizer st = new StringTokenizer(br.readLine());
-        	arr[0][i] = Integer.parseInt(st.nextToken());
-        	arr[1][i] = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(br.readLine());
+        int[] T = new int[N+1];
+        int[] P = new int[N+1];
+        for (int i = 1; i <= N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            T[i] = Integer.parseInt(st.nextToken());
+            P[i] = Integer.parseInt(st.nextToken());
         }
-        
-        dfs(0, 0);
-        
-        System.out.println(max);
+
+        int[] dp = new int[N+2]; // N번째부터 해당 상담 포함하여 최댓값 저장
+        for (int i = N; i > 0; i--) {
+            dp[i] = dp[i+1];
+
+            if (i + T[i] > N+1) continue;// 이번 상담이 기간을 넘기면 continue
+                
+            dp[i] = Math.max(dp[i], P[i]+dp[i+T[i]]); // 이전 dp 결과와 이번 상담 포함한 최댓값 중 선택
+        }
+
+        System.out.println(dp[1]);
     }
 }
