@@ -3,45 +3,47 @@ import java.util.*;
 
 public class Solution {
 	
-	static int N; // 식재료 수 
-	static int[][] arr;
+	static int N; // 행 열 크기
+	static int[][] arr; // 입력 배열
 	
-	static int[] select1; // 선택한 식재료
-	static int[] select2; // 선택안된 식재료
-	static int res; // 궁합 차
+	static int sum; // 전체 합
+	static int[] select; // 선택 배열
+	static int res;
 	
-	// 조합 찾기
-	static void selec(int cnt, int idx) {
+	static void selectFood(int idx, int cnt) {
 		if (cnt == N/2) {
-			// 선택 안된 식재료 찾기
-			int selectIdx = 0;
+			int[] notSelect = new int[N/2];
+			int notSelectIdx = 0;
 			for (int i = 0; i < N; i++) {
-				int j = 0;
-				for (; j < N/2; j++) {
-					if (select1[j] == i) break;
+				boolean isSelected = false;
+				for (int j = 0; j < N/2; j++) {
+					if (select[j] == i) {
+						isSelected = true;
+						break;
+					}
 				}
-				if (j == N/2) select2[selectIdx++] = i;
+				if (isSelected) continue;
+				
+				notSelect[notSelectIdx++] = i;
 			}
 			
-			// 식재료 궁합의 합 계산
-			int sum1 = 0; // 선택 식재료 궁합의 합
-			int sum2 = 0; // 선택안된 식재료 궁합의 합
+			int s1 = 0, s2 = 0;
 			for (int i = 0; i < N/2; i++) {
 				for (int j = i+1; j < N/2; j++) {
-					sum1 += arr[select1[i]][select1[j]];
-					sum1 += arr[select1[j]][select1[i]];
-					sum2 += arr[select2[i]][select2[j]];
-					sum2 += arr[select2[j]][select2[i]];
+					s1 += arr[select[i]][select[j]];
+					s2 += arr[notSelect[i]][notSelect[j]];
 				}
 			}
-			int sub = Math.abs(sum1 - sum2);
+		
+			int sub = Math.abs(s1 - s2);
 			if (sub < res) res = sub;
+			
 			return;
 		}
 		
 		for (int i = idx; i < N; i++) {
-			select1[cnt] = i;
-			selec(cnt+1, i+1);
+			select[cnt] = i;
+			selectFood(i+1, cnt+1);
 		}
 	}
 	
@@ -51,29 +53,33 @@ public class Solution {
 		
 		int T = Integer.parseInt(br.readLine());
 		for (int t = 1; t <= T; t++) {
-			res = Integer.MAX_VALUE;
-			
 			// 입력
 			N = Integer.parseInt(br.readLine());
 			arr = new int[N][N];
-			select1 = new int[N/2];
-			select2 = new int[N/2];
+			sum = 0;
 			for (int i = 0; i < N; i++) {
 				StringTokenizer st = new StringTokenizer(br.readLine());
 				for (int j = 0; j < N; j++) {
 					arr[i][j] = Integer.parseInt(st.nextToken());
+					if (i > j) {
+						arr[j][i] += arr[i][j];
+						sum += arr[j][i];
+					}
 				}
 			}
 			
-			selec(0, 0);
+			select = new int[N/2];
+			res = Integer.MAX_VALUE;
 			
-			// 출력
+			selectFood(0, 0);
+			
 			sb.append("#")
 				.append(t)
 				.append(" ")
 				.append(res)
 				.append("\n");
 		}
+		
 		System.out.println(sb);
 	}
 }
