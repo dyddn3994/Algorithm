@@ -14,6 +14,7 @@ class Main {
 		Queue<Node> queue = new PriorityQueue<>();
 		queue.add(new Node(x, 0));
 		int maxRoad = 0; // 가장 유지비가 큰 길의 유지비, 해당 길만 끊어서 마을 구성
+		int visitedCnt = 0; // 방문한 노드 수
 		
 		while(!queue.isEmpty()) {
 			Node node = queue.poll();
@@ -23,6 +24,9 @@ class Main {
 			
 			res += node.expense;
 			maxRoad = Math.max(maxRoad, node.expense);
+			
+			visitedCnt++;
+			if (visitedCnt == N) break;
 
 			for (Node n : list[node.num]) {
 				if (!visited[n.num]) queue.add(n);
