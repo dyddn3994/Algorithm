@@ -14,13 +14,19 @@ class Main {
 		Queue<Node> queue = new PriorityQueue<>();
 		queue.add(new Node(x, 0));
 		
+		int visitedCnt = 0; // 방문한 노드 수
+		
 		while(!queue.isEmpty()) {
 			Node node = queue.poll();
 			
 			if (visited[node.n]) continue;
 			visited[node.n] = true;
-			
+
 			res += node.cost;
+			
+			visitedCnt++;
+			if (visitedCnt == N) return;
+			
 			for (Node nNode : list[node.n]) {
 				if (visited[nNode.n]) continue;
 				
