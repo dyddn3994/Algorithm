@@ -103,7 +103,6 @@ class Main {
 			}
 		}
 
-		// System.out.println(arr[sx][sy] + ": " + blockCnt + " " + rainbowBlockCnt);
 		// 그룹 생성이 가능한지 확인 및 가장 큰 블록인지 확인
 		if (blockCnt < 2) return;
 		if (blockCnt > selectedBlockCnt || (blockCnt == selectedBlockCnt && rainbowBlockCnt >= selectedRainbowBlockCnt)) {
@@ -147,18 +146,15 @@ class Main {
 			// 점수 획득-제거-중력-회전-중력
 			res += selectedBlockCnt * selectedBlockCnt;
 			deleteBlock();
-			// test();
 			gravity();
-			// test();
 			turn();
-			// test();
 			gravity();
-			// test();
 		}
 
 		System.out.println(res);
     }
 
+	// 테스트용 출력
 	static void test() {
 		System.out.println();
 		for (int i = 0; i < N; i++) {
