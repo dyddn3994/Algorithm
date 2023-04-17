@@ -50,7 +50,6 @@ class Main {
 			sum = (sum * div(i - 1, idx - 1)) % MOD; // 왼쪽 케이스, 개수가 영향있는 쪽
 			sum = (sum * div(n - i + 1, 1)) % MOD; // 오른쪽 케이스, 안보이는 쪽으로 자리가 상관없으므로 idx == 1
 			cnt = (cnt + sum) % MOD;
-			// System.out.println("in div: "+cnt);
 		}
 
 		divs[n][idx] = cnt;
@@ -62,13 +61,9 @@ class Main {
 
 		for (int i = L; i <= N - R + 1; i++) {
 			long sum = getComb(N - 1, i - 1);
-			// System.out.println("i: "+i+", comb: "+sum);
 			sum = (sum * div(i - 1, L - 1)) % MOD; // 왼쪽 케이스
-			// System.out.println("sum 1 : "+sum);
 			sum = (sum * div(N - i, R - 1)) % MOD; // 오른쪽 케이스
-			// System.out.println("sum 2 : "+sum);
 			cnt = (cnt + sum) % MOD;
-			// System.out.println("case: "+sum);
 		}
 
 		return cnt;
@@ -95,16 +90,5 @@ class Main {
 		long res = calculate();
 
 		System.out.println(res);
-
-		// System.out.println();
-		// for (int i = 0; i <= N; i++) {
-		// 	System.out.println(fac[i]);
-		// }
-		// for (int i = 0; i <= N; i++) {
-		// 	for (int j = 0; j <= N; j++) {
-		// 		System.out.print(comb[i][j] + " ");
-		// 	}
-		// 	System.out.println();
-		// }
     }
 }
