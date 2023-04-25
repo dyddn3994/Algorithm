@@ -89,7 +89,7 @@ class Main {
                 for (int j = 0; j < C; j++) {
                     if (arr[i][j] == 1) sb.append("I");
                     else if (arr[i][j] == 2) sb.append("R");
-                    else sb.append(".");
+                    else sb.append("."); // 터진 경우에 입력값이 3이므로 ==0으로 처리하면 오류
                 }
                 sb.append("\n");
             }
