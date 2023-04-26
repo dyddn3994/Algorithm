@@ -10,12 +10,13 @@ public class Main {
 	
 	static void setPrimes() {
 		for (int i = 2; i <= N; i++) {
-			if (isNotPrime[i]) continue;
+			if (!isNotPrime[i]) {
 			
-			primes.add(i);
-			for (int j = i; j <= N; j += i) {
-				isNotPrime[j] = true; 
-			}
+			    primes.add(i);
+			    for (int j = i; j <= N; j += i) {
+			    	isNotPrime[j] = true; 
+			    }
+            }
 		}
 	}
 	
