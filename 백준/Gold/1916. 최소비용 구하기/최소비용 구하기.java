@@ -10,7 +10,6 @@ public class Main {
 	
 	static List<Node>[] list;
 	static int[] dist;
-	static boolean[] visited;
 	
 	static void dijkstra(int S) {
 		PriorityQueue<Node> pq = new PriorityQueue<>();
@@ -20,12 +19,9 @@ public class Main {
 		while (!pq.isEmpty()) {
 			Node node = pq.poll();
 			
-			if (visited[node.n]) continue; 
-			visited[node.n] = true;
+			if (dist[node.n] < node.cost) continue; 
 			
 			for (Node nNode : list[node.n]) {
-				if (visited[nNode.n]) continue;
-				
 				if (dist[nNode.n] > dist[node.n] + nNode.cost) {
 					dist[nNode.n] = dist[node.n] + nNode.cost;
 					pq.add(new Node(nNode.n, dist[nNode.n]));
@@ -66,8 +62,6 @@ public class Main {
 		for (int i = 1; i <= N; i++) {
 			dist[i] = Integer.MAX_VALUE; 
 		}
-		
-		visited = new boolean[N + 1];
 		
 		dijkstra(S);
 		
