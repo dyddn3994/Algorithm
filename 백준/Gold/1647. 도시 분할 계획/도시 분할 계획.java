@@ -80,6 +80,7 @@ class Main {
 		}
 		
 		int maxRoad = 0; // 가장 유지비가 큰 길의 유지비, 해당 길만 끊어서 마을 구성
+		int visitedCnt = 0; // 방문한 노드 수
 		
 		while(!queue.isEmpty()) {
 			Node2 node = queue.poll();
@@ -89,6 +90,9 @@ class Main {
 			
 			res += node.cost;
 			maxRoad = Math.max(maxRoad, node.cost);
+			
+			visitedCnt++;
+			if (visitedCnt == N) break;
 		}
 		
 		res -= maxRoad;
