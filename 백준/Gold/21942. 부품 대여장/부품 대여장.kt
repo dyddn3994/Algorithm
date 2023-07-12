@@ -12,8 +12,6 @@ fun dateGap(date: String): Long {
 }
 
 fun main() = with(System.`in`.bufferedReader()) {
-    val oneMinuteToLong = dateToLong("2000-01-01 01:01") - dateToLong("2000-01-01 01:00")
-
     val (n, L, f) = readLine().split(" ")
     val N = n.toInt()
     val F = f.toLong()
@@ -30,7 +28,7 @@ fun main() = with(System.`in`.bufferedReader()) {
             // 반납
             val gap = (dateToLong("$date $time") - rentalMap[part]!![name]!!) / (1000 * 60)
             if (gap > fineGap) {
-                val fine = ((gap - fineGap)) * F
+                val fine = (gap - fineGap) * F
                 fineMap[name] = (fineMap[name] ?: 0) + fine
             }
 
