@@ -108,14 +108,6 @@ public class Main {
             sb.append(i).append("\n");
         }
 
-//        for (int i = 1; i <= N; i++) {
-//            System.out.println(i + ": " + maxDist[i]);
-//            for (int j = 1; j <= N; j++) {
-//                if (dist[i][j] == Integer.MAX_VALUE) System.out.print("F");
-//                else System.out.print(dist[i][j]);
-//            }
-//            System.out.println();
-//        }
         System.out.println(sb);
     }
 }
