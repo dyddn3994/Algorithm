@@ -29,19 +29,9 @@ fun main() = with(System.`in`.bufferedReader()) {
             val plusCnt = n.spinPlusCnt(e)
             val minusCnt = n.spinMinusCnt(e)
 
-//            println("$i $j $n $e $plusCnt $minusCnt")
-
             dp[i][n] = (plusCnt + dp[i - 1][(plusCnt + sb + j) % 10]).coerceAtMost(minusCnt + dp[i - 1][(sb + j) % 10])
         }
     }
-
-//    repeat(N) { i ->
-//        repeat(10) { j ->
-//            print(dp[i][j])
-//            print(" ")
-//        }
-//        println()
-//    }
 
     println(dp[N - 1][start[N - 1] - '0'])
 }
